@@ -1,0 +1,7 @@
+cache-sensor
+*.exe
+*.exe.zip
+*_osx
+*_osx.zip
+*.zip
+.vscode
