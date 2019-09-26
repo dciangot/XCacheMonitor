@@ -217,6 +217,7 @@ func translate(b []byte) string {
 
 		if h.RecType == 2 {
 			//fmt.Println("b[8:32]", b[8:32])
+			fmt.Println("FileID", h.FileID)
 			fmt.Println("RecSize", h.RecSize)
 			fmt.Println("----")
 
@@ -286,21 +287,30 @@ func translate(b []byte) string {
 
 			}
 
-		}
+		} else if h.RecType == 3 {
+			r = bytes.NewReader(b[32:80])
 
-		// else if h.RecType == 3 {
-		// 	r = bytes.NewReader(b[8:])
+			var CloseMon struct {
+				Rectype   uint8
+				RecFlag   uint16
+				RecSize   uint8
+				FileID uint32
+				read uint16
+				readv      uint32
+				write  uint32
+			}
 
-		// 	var msg []MsgMon
-		// 	if err := binary.Read(r, binary.LittleEndian, &msg); err != nil {
-		// 		fmt.Println("binary.Read failed:", err)
-		// 	}
+			var close CloseMon
 
-		// 	if len(msg) >= 0 {
-		// 		fmt.Println("code", string(msg[0].RecType))
-		// 	}
+			if err := binary.Read(r, binary.LittleEndian, &close); err != nil {
+				fmt.Println("binary.Read failed:", err)
+			}
 
-		// }
+			fmt.Println("RecClose type:", close.FileID)
+			fmt.Println("RecClose flag:", close.read)
+			fmt.Println("RecClose len:", close.readv)
+			fmt.Println("++++++")
+
 	}
 
 	return string(b)

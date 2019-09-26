@@ -66,6 +66,6 @@ gensrc:
 	@echo ")" >> $(VERSIONFILE)
 
 build-release: tidy gensrc build doc test windows-build macos-build docker-img-build
-	zip dodas.zip dodas
-	zip dodas.exe.zip dodas.exe
-	zip dodas_osx.zip dodas_osx
+	zip $(BINARY_NAME).zip $(BINARY_NAME)
+	zip $(BINARY_NAME).exe.zip $(BINARY_NAME).exe
+	zip $(BINARY_NAME)_osx.zip $(BINARY_NAME)_osx
