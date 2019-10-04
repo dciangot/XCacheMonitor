@@ -214,7 +214,7 @@ func translate(b []byte) string {
 		if err := binary.Read(r, binary.LittleEndian, &h); err != nil {
 			fmt.Println("binary.Read failed:", err)
 		}
-
+                fmt.Println("Rectype:", h.RecType)
 		if h.RecType == 2 {
 			//fmt.Println("b[8:32]", b[8:32])
 			fmt.Println("FileID", h.FileID)
@@ -304,9 +304,9 @@ func translate(b []byte) string {
 				fmt.Println("binary.Read failed:", err)
 			}
 
-			fmt.Println("RecClose type:", close.FileID)
-			fmt.Println("RecClose flag:", close.read)
-			fmt.Println("RecClose len:", close.readv)
+			fmt.Println("RecClose FileID:", close.FileID)
+			fmt.Println("RecClose read:", close.read)
+			fmt.Println("RecClose readv:", close.readv)
 			fmt.Println("++++++")
 
 		}
